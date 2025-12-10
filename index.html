@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jason D. Grob | System Security Engineering & Cybersecurity Leadership</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Jason D. Grob – System Security Engineering & Cybersecurity leadership for high-consequence environments, AI/ML security, and enterprise-style homelabs." />
+  <style>
+    /* ---------- Base ---------- */
+    :root {
+      --bg-main: #020617;        /* slate-950 */
+      --bg-elevated: #020617;
+      --bg-card: #020617;
+      --bg-card-soft: #020617;
+      --bg-section: #020617;
+      --accent: #38bdf8;         /* sky-400 */
+      --accent-soft: rgba(56,189,248,0.15);
+      --accent-strong: #0ea5e9;
+      --text-main: #e5e7eb;      /* gray-200 */
+      --text-muted: #9ca3af;     /* gray-400 */
+      --text-soft: #6b7280;      /* gray-500 */
+      --border-subtle: #111827;  /* gray-900 */
+      --chip-bg: rgba(15,23,42,0.85);
+      --danger: #f97373;
+      --max-width: 1040px;
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 45px rgba(15,23,42,0.95);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background: radial-gradient(120% 180% at 10% -20%, rgba(56,189,248,0.25) 0, transparent 45%),
+                  radial-gradient(90% 140% at 90% 120%, rgba(56,189,248,0.18) 0, transparent 55%),
+                  #020617;
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                   "Segoe UI", sans-serif;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      padding: 0 16px 60px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrapper {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    /* ---------- Top Nav ---------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom,
+               rgba(2,6,23,0.96),
+               rgba(2,6,23,0.88),
+               transparent);
+      border-bottom: 1px solid rgba(15,23,42,0.8);
+      padding: 10px 0 6px;
+      margin-bottom: 10px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
+
+    .brand-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 0 0, var(--accent), #0f172a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 0 0 0 1px rgba(148,163,184,0.3);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-text span:first-child {
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .brand-text span:last-child {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--text-muted);
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(15,23,42,0.9);
+      color: var(--text-main);
+    }
+
+    .nav-cta {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148,163,184,0.5);
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.86rem;
+      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.12), rgba(15,23,42,0.95));
+      box-shadow: 0 10px 35px rgba(0,0,0,0.75);
+    }
+
+    .nav-cta span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34,197,94,0.18);
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* ---------- Sections ---------- */
+    section {
+      padding: 26px 0;
+    }
+
+    .section-inner {
+      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.16), rgba(15,23,42,0.96));
+      border-radius: 26px;
+      border: 1px solid rgba(148,163,184,0.25);
+      box-shadow: var(--shadow-soft);
+      padding: 26px 26px 28px;
+    }
+
+    .section-heading {
+      font-size: 1.1rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 650;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 620px;
+    }
+
+    @media (max-width: 640px) {
+      .section-inner {
+        border-radius: 18px;
+        padding: 20px 18px 22px;
+      }
+      .section-title {
+        font-size: 1.35rem;
+      }
+    }
+
+    /* ---------- Hero ---------- */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3.2fr) minmax(0, 2.3fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 3vw, 2.7rem);
+      line-height: 1.15;
+      margin-bottom: 10px;
+      font-weight: 720;
+    }
+
+    .hero-title span.accent {
+      background: linear-gradient(to right, #38bdf8, #22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-bottom: 18px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+      font-size: 0.8rem;
+    }
+
+    .chip {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148,163,184,0.5);
+      padding: 4px 10px;
+      background: var(--chip-bg);
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      color: var(--text-muted);
+    }
+
+    .chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+    }
+
+    .chip-dot.green {
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.22);
+    }
+
+    .chip-dot.blue {
+      background: var(--accent);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      border-radius: var(--radius-pill);
+      padding: 10px 16px;
+      border: 1px solid transparent;
+      font-size: 0.92rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-main);
+      transition: transform 0.1s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #22c55e);
+      border-color: transparent;
+      color: #0b1120;
+      box-shadow: 0 14px 35px rgba(0,0,0,0.9);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 40px rgba(0,0,0,1);
+    }
+
+    .btn-outline {
+      border-color: rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.9);
+      color: var(--text-muted);
+    }
+
+    .btn-outline:hover {
+      background: rgba(15,23,42,1);
+      color: var(--text-main);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.85);
+    }
+
+    .btn span.arrow {
+      font-size: 1.1rem;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .hero-right {
+      border-radius: 22px;
+      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.3), rgba(15,23,42,0.98));
+      border: 1px solid rgba(148,163,184,0.35);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-right-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .hero-right-highlight {
+      font-size: 0.96rem;
+      margin-bottom: 14px;
+    }
+
+    .hero-right-highlight span {
+      color: var(--accent-strong);
+      font-weight: 550;
+    }
+
+    .hero-list {
+      list-style: none;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .hero-list li::before {
+      content: "▹";
+      color: var(--accent);
+      margin-right: 6px;
+    }
+
+    .hero-tagline {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      border-top: 1px dashed rgba(148,163,184,0.3);
+      padding-top: 10px;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 840px) {
+      .hero-grid {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+
+    /* ---------- Two-column utility ---------- */
+    .two-col {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.2fr);
+      gap: 20px;
+    }
+
+    .two-col-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    @media (max-width: 840px) {
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* ---------- Cards & Lists ---------- */
+    .card {
+      background: rgba(15,23,42,0.95);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31,41,55,0.9);
+      padding: 14px 14px 12px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    .card-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-soft);
+    }
+
+    .card-body {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      border-radius: var(--radius-pill);
+      padding: 3px 8px;
+      font-size: 0.72rem;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(55,65,81,0.9);
+      color: var(--text-soft);
+    }
+
+    .list-compact {
+      list-style: none;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .list-compact li {
+      position: relative;
+      padding-left: 15px;
+    }
+
+    .list-compact li::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 0.7em;
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .eyebrow-inline {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+
+    .muted {
+      color: var(--text-soft);
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      margin-top: 28px;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      border-top: 1px solid rgba(15,23,42,0.9);
+      padding-top: 16px;
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrapper nav">
+      <div class="nav-left">
+        <div class="brand-badge">JG</div>
+        <div class="brand-text">
+          <span>System Security Engineering</span>
+          <span>Jason D. Grob</span>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#experience">Experience</a>
+        <a href="#focus">What I Do</a>
+        <a href="#homelab">Homelab</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="#contact">
+        <span class="dot"></span>
+        <span>Open to senior security leadership roles</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="wrapper">
+    <!-- HERO -->
+    <section id="top">
+      <div class="section-inner">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-eyebrow">System Security Engineering & Cybersecurity Leadership</div>
+            <h1 class="hero-title">
+              Helping organizations build <span class="accent">secure, high-consequence</span> systems that actually work in the real world.
+            </h1>
+            <p class="hero-subtitle">
+              I’m <strong>Jason D. Grob</strong>, a CISSP-certified security and system engineering leader.
+              I work at the intersection of <strong>system security engineering (SSE)</strong>, <strong>AI/ML and advanced tooling security</strong>,
+              and <strong>enterprise-grade infrastructure</strong>—with experience in environments where failure is not an option.
+            </p>
+
+            <div class="hero-meta">
+              <div class="chip">
+                <span class="chip-dot green"></span>
+                <span>Actively open to Director-level & senior security engineering roles</span>
+              </div>
+              <div class="chip">
+                <span class="chip-dot blue"></span>
+                <span>DoD/DoE-style, high-sensitivity systems</span>
+              </div>
+            </div>
+
+            <div class="hero-actions">
+              <!-- Replace # with resume link when ready -->
+              <a class="btn btn-primary" href="#experience">
+                <span>View experience & impact</span>
+                <span class="arrow">↘</span>
+              </a>
+              <!-- Replace LINKEDIN_URL_HERE with your public profile URL -->
+              <a class="btn btn-outline" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+                <span>Connect on LinkedIn</span>
+                <span class="arrow">↗</span>
+              </a>
+            </div>
+
+            <p class="hero-note">
+              Currently focused on <strong>full-time leadership roles</strong>. I also
+              <span class="muted">occasionally advise</span> select teams on SSE, AI/ML security, and secure homelab / testbed design.
+            </p>
+          </div>
+
+          <aside class="hero-right" aria-label="Snapshot of focus areas">
+            <div class="hero-right-title">At a glance</div>
+            <p class="hero-right-highlight">
+              I specialize in <span>making advanced systems safe to build and operate</span> –
+              from AI tooling and dev/test/prod pipelines to segmented, observable networks.
+            </p>
+            <ul class="hero-list">
+              <li>System Security Engineering for complex, multi-domain environments</li>
+              <li>Security guardrails for AI/ML and advanced tooling in sensitive orgs</li>
+              <li>Zero trust, least-privilege access, and environment segmentation</li>
+              <li>Hands-on homelab mirroring enterprise-style deployments</li>
+            </ul>
+            <p class="hero-tagline">
+              I’m a builder and a strategist: equally comfortable diagramming a zero-trust architecture
+              and fixing a nasty DNS/VLAN issue at 11 PM so the mission can continue.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT I DO -->
+    <section id="focus">
+      <div class="section-inner">
+        <div class="section-heading">What I Do</div>
+        <h2 class="section-title">Security, systems, and structure that hold up under pressure</h2>
+        <p class="section-subtitle">
+          My work sits where architecture, implementation, and operations meet. I care about
+          building systems that are <strong>secure by design</strong>, <strong>operationally realistic</strong>,
+          and <strong>understandable to leadership</strong>.
+        </p>
+
+        <div class="two-col">
+          <div class="two-col-stack">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">System Security Engineering (SSE)</div>
+                <div class="card-tag">Architecture & lifecycle</div>
+              </div>
+              <div class="card-body">
+                <ul class="list-compact">
+                  <li>Integrating security into the full system lifecycle, not bolting it on at the end.</li>
+                  <li>Threat modeling high-consequence systems and mapping controls to real risks.</li>
+                  <li>Designing dev / test / prod environments that reflect zero-trust principles.</li>
+                </ul>
+                <div class="pill-row">
+                  <span class="pill">System engineering</span>
+                  <span class="pill">NNSA / NASA-style rigor</span>
+                  <span class="pill">Risk-driven controls</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Security Leadership & Enablement</div>
+                <div class="card-tag">People & programs</div>
+              </div>
+              <div class="card-body">
+                <ul class="list-compact">
+                  <li>Partnering with engineering, product, and leadership so security unblocks instead of slows.</li>
+                  <li>Translating security posture and SSE concerns into language executives actually use.</li>
+                  <li>Mentoring engineers and analysts toward thinking in systems, not just tickets.</li>
+                </ul>
+                <div class="pill-row">
+                  <span class="pill">Director-track leadership</span>
+                  <span class="pill">Cross-functional buy-in</span>
+                  <span class="pill">Plain-language security</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="two-col-stack">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">AI / Advanced Tooling Security</div>
+                <div class="card-tag">Data, models & usage</div>
+              </div>
+              <div class="card-body">
+                <ul class="list-compact">
+                  <li>Defining guardrails for LLMs and AI tools in environments with sensitive or classified data.</li>
+                  <li>Designing access control, logging, and usage patterns that make audits straightforward.</li>
+                  <li>Balancing experimentation with strict constraints that respect mission and policy.</li>
+                </ul>
+                <div class="pill-row">
+                  <span class="pill">AI/ML security</span>
+                  <span class="pill">Usage governance</span>
+                  <span class="pill">Data protection</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Enterprise-Style Homelab & Testing</div>
+                <div class="card-tag">Hands-on validation</div>
+              </div>
+              <div class="card-body">
+                <ul class="list-compact">
+                  <li>Running a segmented homelab with Proxmox, TrueNAS, AD, Pi-hole, Unbound, and VLAN-aware DNS.</li>
+                  <li>Testing DNS, VPN, SIEM, and firewall designs before they reach production.</li>
+                  <li>Using the lab as a proving ground for system security engineering practices.</li>
+                </ul>
+                <div class="pill-row">
+                  <span class="pill">VLAN-segmented lab</span>
+                  <span class="pill">DNS / identity focus</span>
+                  <span class="pill">Future SIEM/IDS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="section-inner">
+        <div class="section-heading">Experience & Impact</div>
+        <h2 class="section-title">What I’ve been building and securing</h2>
+        <p class="section-subtitle">
+          This is a high-level view for hiring managers and technical leaders.
+          A full CV and detailed project list are available on request.
+        </p>
+
+        <div class="two-col" style="margin-top:18px;">
+          <div class="two-col-stack">
+            <div class="eyebrow-inline">Selected themes</div>
+            <ul class="list-compact">
+              <li>Shaping security plans for AI and advanced tooling in environments with DoD/DoE-level sensitivity.</li>
+              <li>Bringing system security engineering discipline into organizations whose tooling outgrew their guardrails.</li>
+              <li>Designing and running an enterprise-style homelab that mirrors real-world production constraints.</li>
+            </ul>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">System Security Engineering & Cybersecurity</div>
+                  <div class="muted" style="font-size:0.8rem;">Lead / senior engineer roles in high-consequence environments</div>
+                </div>
+              </div>
+              <div class="card-body">
+                <ul class="list-compact">
+                  <li>Worked on federal programs where confidentiality, integrity, and availability are truly mission-critical.</li>
+                  <li>Helped align engineering teams, security requirements, and system constraints into coherent architectures.</li>
+                  <li>Contributed to cost-aware, risk-aware decisions that respected both mission and budget.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="two-col-stack">
+            <div class="eyebrow-inline">Proof-of-execution</div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Security plan for AI & tooling</div>
+                <div class="card-tag">Governance & guardrails</div>
+              </div>
+              <div class="card-body">
+                <p class="muted">
+                  Developing a comprehensive, living security plan for AI/ML and advanced tools in a
+                  high-sensitivity engineering environment, focused on:
+                </p>
+                <ul class="list-compact" style="margin-top:6px;">
+                  <li>Environment separation (dev/test/prod) and zero-trust access to models, data, and tools.</li>
+                  <li>Least-privilege access, auditable workflows, and clear accountability for usage.</li>
+                  <li>Preventing data leakage while still allowing engineers to innovate.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Enterprise-style homelab build</div>
+                <div class="card-tag">Architecture & operations</div>
+              </div>
+              <div class="card-body">
+                <p class="muted">
+                  Built a homelab to mimic enterprise operations, including:
+                </p>
+                <ul class="list-compact" style="margin-top:6px;">
+                  <li>Proxmox virtualization, TrueNAS storage, and Active Directory with proper OU structure.</li>
+                  <li>Pi-hole + Unbound DNS, VLAN-aware routing, reverse DNS zones, and hardened recursive DNS.</li>
+                  <li>Roadmap for SIEM / log aggregation, VPN-admin access, and future IDS/IPS integration.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="hero-note" style="margin-top:18px;">
+          <strong>Note for hiring managers:</strong> I’m happy to map these experiences directly to your architecture,
+          risk posture, and roadmap in a conversation or technical deep-dive.
+        </p>
+      </div>
+    </section>
+
+    <!-- HOMELAB -->
+    <section id="homelab">
+      <div class="section-inner">
+        <div class="section-heading">Homelab & Labs</div>
+        <h2 class="section-title">A place to break things safely – and learn from it</h2>
+        <p class="section-subtitle">
+          My homelab isn’t a toy cluster; it’s a structured environment for practicing what I preach:
+          segmented networks, layered controls, and observable systems that behave like production.
+        </p>
+
+        <div class="two-col">
+          <div class="two-col-stack">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Core lab design</div>
+                <div class="card-tag">Modeled after real enterprises</div>
+              </div>
+              <div class="card-body">
+                <ul class="list-compact">
+                  <li>Multiple VLANs for management, trusted devices, workstations, IoT, servers, test, and VPN.</li>
+                  <li>Active Directory domain with structured OUs, group-based policy, and proper DNS integration.</li>
+                  <li>Pi-hole + Unbound design where AD DNS, recursive resolution, and filtering all play their own roles.</li>
+                </ul>
+                <div class="pill-row">
+                  <span class="pill">Zero-trust-friendly layout</span>
+                  <span class="pill">DNS as a first-class citizen</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Security & observability roadmap</div>
+                <div class="card-tag">Next steps</div>
+              </div>
+              <div class="card-body">
+                <ul class="list-compact">
+                  <li>Adding a lightweight SIEM to collect DNS, VPN, and system logs for detection engineering practice.</li>
+                  <li>Designing VPN-admin paths that allow emergency access without punching unnecessary holes.</li>
+                  <li>Experimenting with IDS/IPS placement that respects segmentation, cost, and noise levels.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="two-col-stack">
+            <div class="eyebrow-inline">Why this matters for you</div>
+            <ul class="list-compact">
+              <li>I test ideas in the lab before proposing them in your environment.</li>
+              <li>I understand the day-two realities of maintaining DNS, VPN, and segmented networks.</li>
+              <li>I can speak from direct experience, not just from slideware or policy documents.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+              In other words: if I recommend a design to you, it’s something I’d be willing to run,
+              debug, and live with myself.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-inner">
+        <div class="section-heading">About</div>
+        <h2 class="section-title">Builder first, security leader always</h2>
+        <p class="section-subtitle">
+          I see security as an engineering discipline: deeply practical, grounded in reality, and always connected to the mission.
+        </p>
+
+        <div class="two-col" style="margin-top:16px;">
+          <div class="two-col-stack">
+            <p class="muted">
+              I’ve spent my career working on complex systems where the stakes are high and the tolerance
+              for hand-wavy security is low. I’m comfortable moving between:
+            </p>
+            <ul class="list-compact" style="margin-top:6px;">
+              <li>Big-picture architecture and system risk discussions with leadership.</li>
+              <li>Hands-on debugging of DNS, VLAN, or identity issues in the weeds.</li>
+              <li>Coaching engineers toward a systems-thinking mindset about security.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+              My goal in the next phase of my career is clear: <strong>step fully into security leadership</strong> –
+              Director-level and beyond – while staying close enough to the technology to keep decisions honest.
+            </p>
+          </div>
+
+          <div class="two-col-stack">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">What it’s like to work with me</div>
+                <div class="card-tag">Day-to-day</div>
+              </div>
+              <div class="card-body">
+                <ul class="list-compact">
+                  <li>Direct, honest communication – no fear-mongering, no jargon for its own sake.</li>
+                  <li>Strong bias toward clarity, documentation, and repeatable processes.</li>
+                  <li>Respect for constraints: budget, politics, timelines, and legacy systems.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Quiet consulting</div>
+                <div class="card-tag">Advisory, by fit</div>
+              </div>
+              <div class="card-body">
+                <p class="muted">
+                  While my primary focus is on full-time leadership roles, I occasionally
+                  advise organizations on:
+                </p>
+                <ul class="list-compact" style="margin-top:6px;">
+                  <li>System security engineering strategy and roadmapping.</li>
+                  <li>Secure introduction of AI/ML and LLM tooling into existing environments.</li>
+                  <li>Designing realistic homelab/test environments for internal teams.</li>
+                </ul>
+                <p class="muted" style="margin-top:8px;">
+                  If that sounds like a fit, reach out and we can discuss whether it makes sense.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-inner">
+        <div class="section-heading">Contact</div>
+        <h2 class="section-title">Let’s talk about your systems and security roadmap</h2>
+        <p class="section-subtitle">
+          If you’re exploring senior security engineering or Director-level roles, or you want to discuss advisory work,
+          I’d be glad to connect.
+        </p>
+
+        <div class="two-col" style="margin-top:18px;">
+          <div class="two-col-stack">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">For hiring managers & leaders</div>
+                <div class="card-tag">Full-time roles</div>
+              </div>
+              <div class="card-body">
+                <p class="muted">
+                  I’m particularly interested in roles that combine:
+                </p>
+                <ul class="list-compact" style="margin-top:6px;">
+                  <li>System security engineering with architecture and leadership.</li>
+                  <li>Responsibility for AI/ML, advanced tooling, or complex infrastructure.</li>
+                  <li>Space to build clear processes and mentor strong technical teams.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="two-col-stack">
+            <p class="muted">
+              The best way to reach me is via email or LinkedIn.
+              Replace the placeholders below with your actual details before sharing this page on applications.
+            </p>
+            <ul class="list-compact" style="margin-top:6px;">
+              <li><strong>Email:</strong> <span class="muted">your.email@yourdomain.com</span></li>
+              <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/" target="_blank" rel="noopener">linkedin.com/in/your-profile</a></li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+              I’m happy to provide a full CV, detailed project breakdowns, or references on request.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrapper">
+        <p>
+          © <span id="year"></span> Jason D. Grob. All rights reserved.
+          &nbsp;•&nbsp; Built as a security-conscious, static site (GitHub Pages + DNS fronting),
+          with plans to migrate into a hardened, segmented homelab web tier when appropriate.
+        </p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Lightweight: update year automatically
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
