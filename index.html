@@ -786,10 +786,10 @@
     <section id="homelab">
       <div class="section-inner">
         <div class="section-heading">Homelab & Labs</div>
-        <h2 class="section-title">A place to break things safely – and learn from it</h2>
+        <h2 class="section-title">A controlled environment to pressure-test security decisions</h2>
         <p class="section-subtitle">
-          My homelab isn’t a toy cluster; it’s a structured environment for practicing what I preach:
-          segmented networks, layered controls, and observable systems that behave like production.
+          My lab environment isn’t a hobby setup — it’s a structured system for validating security architecture, operational tradeoffs, and failure modes before they reach production environments.
+          I use it to practice what I expect teams to live with: segmentation, layered controls, identity-first design, and systems that are observable, supportable, and resilient under stress.
         </p>
 
         <div class="two-col">
@@ -797,17 +797,18 @@
             <div class="card">
               <div class="card-header">
                 <div class="card-title">Core lab design</div>
-                <div class="card-tag">Modeled after real enterprises</div>
+                <div class="card-tag">Modeled after real enterprise environments</div>
               </div>
               <div class="card-body">
                 <ul class="list-compact">
-                  <li>Multiple VLANs for management, trusted devices, workstations, IoT, servers, test, and VPN.</li>
-                  <li>Active Directory domain with structured OUs, group-based policy, and proper DNS integration.</li>
-                  <li>Pi-hole + Unbound design where AD DNS, recursive resolution, and filtering all play their own roles.</li>
+                  <li>Segmented network domains representing management, trusted users, workstations, servers, test systems, and remote access.</li>
+                  <li>Centralized identity and access controls with role separation, policy enforcement, and auditable change paths.</li>
+                  <li>Layered name resolution and traffic control services, each with a clearly defined responsibility and failure boundary..</li>
                 </ul>
                 <div class="pill-row">
-                  <span class="pill">Zero-trust-friendly layout</span>
-                  <span class="pill">DNS as a first-class citizen</span>
+                  <span class="pill">Zero-trust-friendly layouts</span>
+                  <span class="pill">DNS and identity as first-class controls</span>
+                  <span class="pill">Defense in depth</span>
                 </div>
               </div>
             </div>
@@ -815,13 +816,13 @@
             <div class="card">
               <div class="card-header">
                 <div class="card-title">Security & observability roadmap</div>
-                <div class="card-tag">Next steps</div>
+                <div class="card-tag">Intentional evolution, not tool sprawl</div>
               </div>
               <div class="card-body">
                 <ul class="list-compact">
-                  <li>Adding a lightweight SIEM to collect DNS, VPN, and system logs for detection engineering practice.</li>
-                  <li>Designing VPN-admin paths that allow emergency access without punching unnecessary holes.</li>
-                  <li>Experimenting with IDS/IPS placement that respects segmentation, cost, and noise levels.</li>
+                  <li>Incremental introduction of centralized logging and security monitoring to support detection, triage, and post-incident analysis.</li>
+                  <li>Designing controlled administrative access paths that enable emergency response without undermining segmentation or least privilege.</li>
+                  <li>Evaluating intrusion detection and prevention placement with attention to signal quality, operational overhead, and cost.</li>
                 </ul>
               </div>
             </div>
@@ -830,13 +831,12 @@
           <div class="two-col-stack">
             <div class="eyebrow-inline">Why this matters for you</div>
             <ul class="list-compact">
-              <li>I test ideas in the lab before proposing them in your environment.</li>
-              <li>I understand the day-two realities of maintaining DNS, VPN, and segmented networks.</li>
-              <li>I can speak from direct experience, not just from slideware or policy documents.</li>
+              <li>I test ideas in a controlled environment before recommending them to teams or leadership.</li>
+              <li>I understand the day-two realities of operating segmented networks, identity systems, and security controls - not just the design diagrams.</li>
+              <li>I speak from lived operational experience, not just policy language or vendor slideware.</li>
             </ul>
             <p class="muted" style="margin-top:10px;">
-              In other words: if I recommend a design to you, it’s something I’d be willing to run,
-              debug, and live with myself.
+              In short: if I recommend a security design, it’s one I’d be willing to run, debug, and be accountable for myself.
             </p>
           </div>
         </div>
